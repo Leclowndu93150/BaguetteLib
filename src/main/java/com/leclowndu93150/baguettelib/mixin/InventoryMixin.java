@@ -16,8 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Inventory.class)
 public class InventoryMixin {
 
-    @Shadow @Final public Player player;
-
     @Inject(method = "setItem", at = @At("HEAD"))
     private void onSetItem(int index, ItemStack stack, CallbackInfo ci) {
         Inventory self = (Inventory) (Object) this;
@@ -27,19 +25,19 @@ public class InventoryMixin {
             return;
         }
 
-        if (player.level().isClientSide) {
+        if (self.player.level().isClientSide) {
             return;
         }
 
         if (index >= 0 && index < 9) {
             // Hotbar
-            MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.Hotbar(player, index, oldStack, stack));
+            MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.Hotbar(self.player, index, oldStack, stack));
         } else if (index >= 9 && index < 36) {
             // Main inventory
-            MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.MainInventory(player, index, oldStack, stack));
+            MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.MainInventory(self.player, index, oldStack, stack));
         } else if (index == 40) {
             // Offhand
-            MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.Offhand(player, index, oldStack, stack));
+            MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.Offhand(self.player, index, oldStack, stack));
         } else if (index >= 36 && index < 40) {
             // Armor slots (36=feet, 37=legs, 38=chest, 39=head)
             EquipmentSlot slot = switch (index) {
@@ -50,10 +48,10 @@ public class InventoryMixin {
                 default -> null;
             };
             if (slot != null) {
-                MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.Armor(player, slot, index, oldStack, stack));
+                MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.Armor(self.player, slot, index, oldStack, stack));
             }
         }
 
-        MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.All(player, index, oldStack, stack));
+        MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.All(self.player, index, oldStack, stack));
     }
 }
