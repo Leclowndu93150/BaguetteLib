@@ -2,8 +2,8 @@ package com.leclowndu93150.baguettelib.event.entity.death;
 
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.bus.api.Event;
-import net.neoforged.bus.api.ICancellableEvent;
+import net.minecraftforge.eventbus.api.Cancelable;
+import net.minecraftforge.eventbus.api.Event;
 
 public abstract class LivingDeathEvent extends Event {
     protected final LivingEntity entity;
@@ -27,7 +27,8 @@ public abstract class LivingDeathEvent extends Event {
      * Can be canceled to prevent death.
      * Allows modification of entity state before death.
      */
-    public static class Pre extends LivingDeathEvent implements ICancellableEvent {
+    @Cancelable
+    public static class Pre extends LivingDeathEvent{
         public Pre(LivingEntity entity, DamageSource source) {
             super(entity, source);
         }

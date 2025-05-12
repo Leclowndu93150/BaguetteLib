@@ -6,7 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.NeoForge;
+import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -29,7 +29,7 @@ public class PacketHandlerMixin {
             ItemStack newMainHand = this.player.getInventory().getItem(newSlot);
 
             if (!ItemStack.matches(oldMainHand, newMainHand)) {
-                NeoForge.EVENT_BUS.post(new InventoryUpdateEvent.Hands(
+                MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.Hands(
                         this.player, EquipmentSlot.MAINHAND, 0, oldMainHand, newMainHand
                 ));
             }

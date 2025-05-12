@@ -3,7 +3,7 @@ package com.leclowndu93150.baguettelib.mixin;
 import com.leclowndu93150.baguettelib.event.entity.death.PlayerDeathEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
-import net.neoforged.neoforge.common.NeoForge;
+import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +21,7 @@ public class ServerPlayerDeathMixin {
         }
 
         PlayerDeathEvent.Pre event = new PlayerDeathEvent.Pre(self, damageSource);
-        NeoForge.EVENT_BUS.post(event);
+        MinecraftForge.EVENT_BUS.post(event);
         if (event.isCanceled()) {
             ci.cancel();
         }
@@ -35,6 +35,6 @@ public class ServerPlayerDeathMixin {
             return;
         }
 
-        NeoForge.EVENT_BUS.post(new PlayerDeathEvent.Post(self, damageSource));
+        MinecraftForge.EVENT_BUS.post(new PlayerDeathEvent.Post(self, damageSource));
     }
 }

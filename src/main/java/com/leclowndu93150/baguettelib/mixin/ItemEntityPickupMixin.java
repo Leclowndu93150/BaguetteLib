@@ -4,14 +4,20 @@ import com.leclowndu93150.baguettelib.event.inventory.InventoryUpdateEvent;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.NeoForge;
+import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.UUID;
+
 @Mixin(value = ItemEntity.class, priority = 500)
 public class ItemEntityPickupMixin {
+
+    @Shadow
+    private UUID target;
 
     @Inject(method = "playerTouch", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/world/entity/player/Inventory;add(Lnet/minecraft/world/item/ItemStack;)Z")
@@ -26,7 +32,7 @@ public class ItemEntityPickupMixin {
                 return;
             }
 
-            if (self.hasPickUpDelay() || (self.getTarget() != null && !self.getTarget().equals(player.getUUID()))) {
+            if (self.hasPickUpDelay() || (target != null && !target.equals(player.getUUID()))) {
                 return;
             }
 
@@ -38,7 +44,7 @@ public class ItemEntityPickupMixin {
             ItemStack oldStack = player.getInventory().getItem(targetSlot);
             ItemStack newStack = oldStack.isEmpty() ? itemStack.copy() : oldStack.copy();
 
-            if (!oldStack.isEmpty() && ItemStack.isSameItemSameComponents(oldStack, itemStack)) {
+            if (!oldStack.isEmpty() && ItemStack.isSameItem(oldStack, itemStack)) {
                 int transferAmount = Math.min(itemStack.getCount(), oldStack.getMaxStackSize() - oldStack.getCount());
                 newStack.setCount(oldStack.getCount() + transferAmount);
             } else {
@@ -46,14 +52,14 @@ public class ItemEntityPickupMixin {
             }
 
             if (targetSlot >= 0 && targetSlot < 9) {
-                NeoForge.EVENT_BUS.post(new InventoryUpdateEvent.Hotbar(player, targetSlot, oldStack, newStack));
+                MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.Hotbar(player, targetSlot, oldStack, newStack));
             } else if (targetSlot >= 9 && targetSlot < 36) {
-                NeoForge.EVENT_BUS.post(new InventoryUpdateEvent.MainInventory(player, targetSlot, oldStack, newStack));
+                MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.MainInventory(player, targetSlot, oldStack, newStack));
             } else if (targetSlot == 40) {
-                NeoForge.EVENT_BUS.post(new InventoryUpdateEvent.Offhand(player, targetSlot, oldStack, newStack));
+                MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.Offhand(player, targetSlot, oldStack, newStack));
             }
 
-            NeoForge.EVENT_BUS.post(new InventoryUpdateEvent.All(player, targetSlot, oldStack, newStack));
+            MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.All(player, targetSlot, oldStack, newStack));
         }
     }
 
@@ -62,7 +68,7 @@ public class ItemEntityPickupMixin {
 
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             ItemStack existing = inventory.getItem(i);
-            if (!existing.isEmpty() && ItemStack.isSameItemSameComponents(existing, itemStack)
+            if (!existing.isEmpty() && ItemStack.isSameItem(existing, itemStack)
                     && existing.getCount() < existing.getMaxStackSize()) {
                 return i;
             }

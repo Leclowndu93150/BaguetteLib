@@ -2,7 +2,7 @@ package com.leclowndu93150.baguettelib.event.entity.death;
 
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.bus.api.ICancellableEvent;
+import net.minecraftforge.eventbus.api.Cancelable;
 
 public abstract class PlayerDeathEvent extends LivingDeathEvent {
     protected PlayerDeathEvent(Player player, DamageSource source) {
@@ -23,7 +23,8 @@ public abstract class PlayerDeathEvent extends LivingDeathEvent {
      * Allows modification of inventory, experience, etc.
      * Can be canceled to prevent death.
      */
-    public static class Pre extends PlayerDeathEvent implements ICancellableEvent {
+    @Cancelable
+    public static class Pre extends PlayerDeathEvent {
         public Pre(Player player, DamageSource source) {
             super(player, source);
         }

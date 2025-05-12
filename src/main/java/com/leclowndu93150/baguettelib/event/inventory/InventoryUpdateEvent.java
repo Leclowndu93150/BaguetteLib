@@ -3,7 +3,7 @@ package com.leclowndu93150.baguettelib.event.inventory;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.Event;
+import net.minecraftforge.eventbus.api.Event;
 
 public abstract class InventoryUpdateEvent extends Event {
     protected final Player player;

@@ -3,7 +3,7 @@ package com.leclowndu93150.baguettelib.mixin;
 import com.leclowndu93150.baguettelib.event.entity.death.LivingDeathEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.neoforge.common.NeoForge;
+import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +21,7 @@ public class LivingEntityDeathMixin {
         }
 
         LivingDeathEvent.Pre event = new LivingDeathEvent.Pre(self, damageSource);
-        NeoForge.EVENT_BUS.post(event);
+        MinecraftForge.EVENT_BUS.post(event);
         if (event.isCanceled()) {
             ci.cancel();
         }
@@ -35,6 +35,6 @@ public class LivingEntityDeathMixin {
             return;
         }
 
-        NeoForge.EVENT_BUS.post(new LivingDeathEvent.Post(self, damageSource));
+        MinecraftForge.EVENT_BUS.post(new LivingDeathEvent.Post(self, damageSource));
     }
 }

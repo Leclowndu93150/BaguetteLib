@@ -5,7 +5,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.NeoForge;
+import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -33,13 +33,13 @@ public class InventoryMixin {
 
         if (index >= 0 && index < 9) {
             // Hotbar
-            NeoForge.EVENT_BUS.post(new InventoryUpdateEvent.Hotbar(player, index, oldStack, stack));
+            MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.Hotbar(player, index, oldStack, stack));
         } else if (index >= 9 && index < 36) {
             // Main inventory
-            NeoForge.EVENT_BUS.post(new InventoryUpdateEvent.MainInventory(player, index, oldStack, stack));
+            MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.MainInventory(player, index, oldStack, stack));
         } else if (index == 40) {
             // Offhand
-            NeoForge.EVENT_BUS.post(new InventoryUpdateEvent.Offhand(player, index, oldStack, stack));
+            MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.Offhand(player, index, oldStack, stack));
         } else if (index >= 36 && index < 40) {
             // Armor slots (36=feet, 37=legs, 38=chest, 39=head)
             EquipmentSlot slot = switch (index) {
@@ -50,10 +50,10 @@ public class InventoryMixin {
                 default -> null;
             };
             if (slot != null) {
-                NeoForge.EVENT_BUS.post(new InventoryUpdateEvent.Armor(player, slot, index, oldStack, stack));
+                MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.Armor(player, slot, index, oldStack, stack));
             }
         }
 
-        NeoForge.EVENT_BUS.post(new InventoryUpdateEvent.All(player, index, oldStack, stack));
+        MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.All(player, index, oldStack, stack));
     }
 }

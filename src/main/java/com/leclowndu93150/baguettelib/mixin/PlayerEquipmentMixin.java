@@ -4,7 +4,7 @@ import com.leclowndu93150.baguettelib.event.inventory.InventoryUpdateEvent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.NeoForge;
+import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -29,13 +29,13 @@ public class PlayerEquipmentMixin {
 
         int slotIndex = getSlotIndex(slot);
 
-        if (slot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR) {
-            NeoForge.EVENT_BUS.post(new InventoryUpdateEvent.Armor(self, slot, slotIndex, oldStack, stack));
+        if (slot.getType() == EquipmentSlot.Type.ARMOR) {
+            MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.Armor(self, slot, slotIndex, oldStack, stack));
         } else if (slot.getType() == EquipmentSlot.Type.HAND) {
-            NeoForge.EVENT_BUS.post(new InventoryUpdateEvent.Hands(self, slot, slotIndex, oldStack, stack));
+            MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.Hands(self, slot, slotIndex, oldStack, stack));
         }
 
-        NeoForge.EVENT_BUS.post(new InventoryUpdateEvent.All(self, slotIndex, oldStack, stack));
+        MinecraftForge.EVENT_BUS.post(new InventoryUpdateEvent.All(self, slotIndex, oldStack, stack));
     }
 
     private static int getSlotIndex(EquipmentSlot slot) {
