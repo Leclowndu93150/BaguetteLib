@@ -16,8 +16,6 @@ import java.util.UUID;
 @Mixin(value = ItemEntity.class, priority = 500)
 public class ItemEntityPickupMixin {
 
-    @Shadow
-    private UUID target;
 
     @Inject(method = "playerTouch", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/world/entity/player/Inventory;add(Lnet/minecraft/world/item/ItemStack;)Z")
@@ -32,7 +30,7 @@ public class ItemEntityPickupMixin {
                 return;
             }
 
-            if (self.hasPickUpDelay() || (target != null && !target.equals(player.getUUID()))) {
+            if (self.hasPickUpDelay() || (self.target != null && !self.target.equals(player.getUUID()))) {
                 return;
             }
 
