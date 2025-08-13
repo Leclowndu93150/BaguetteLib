@@ -1,8 +1,11 @@
 package com.leclowndu93150.baguettelib;
 
+import com.leclowndu93150.baguettelib.event.entity.CreativeFlightEvent;
 import com.leclowndu93150.baguettelib.example.ExamplePacket;
 import com.leclowndu93150.baguettelib.network.NetworkManager;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -32,11 +35,18 @@ public class Baguettelib {
                 .build();
 
         NeoForge.EVENT_BUS.addListener(this::onPlayerJoin);
+        NeoForge.EVENT_BUS.addListener(this::onCreativeFlight);
     }
 
     @SubscribeEvent
     public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event){
         // if(event.getEntity() instanceof ServerPlayer player) Baguettelib.NETWORK.sendToPlayer(player, new ExamplePacket(69,"Hello World"));
+    }
+
+    @SubscribeEvent
+    public void onCreativeFlight(CreativeFlightEvent.Toggle event){
+//        event.setCanceled(true);
+//        event.setFlightState(false);
     }
 
 }
