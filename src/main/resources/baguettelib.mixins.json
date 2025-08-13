@@ -9,6 +9,7 @@
     "ItemEntityPickupMixin",
     "LivingEntityDeathMixin",
     "PacketHandlerMixin",
+    "PlayerAbilitiesPacketMixin",
     "PlayerDeathMixin",
     "PlayerEquipmentMixin",
     "ServerPlayerDeathMixin"
