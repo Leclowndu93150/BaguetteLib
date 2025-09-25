@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = ItemEntity.class, priority = 500)
+@Mixin(value = ItemEntity.class, priority = 727)
 public class ItemEntityPickupMixin {
 
     @Inject(method = "playerTouch", at = @At(value = "INVOKE",
