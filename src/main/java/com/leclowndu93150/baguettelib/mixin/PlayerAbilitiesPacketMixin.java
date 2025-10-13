@@ -27,7 +27,6 @@ public class PlayerAbilitiesPacketMixin {
             
             if (toggleEvent.isCanceled()) {
                 this.player.onUpdateAbilities();
-                System.out.println("Creative flight toggle event was canceled, not applying changes.");
                 ci.cancel();
                 return;
             } else {
