@@ -70,7 +70,7 @@ public class Baguettelib {
                     .map(Path::getFileName)
                     .filter(Objects::nonNull)
                     .map(Path::toString)
-                    .anyMatch(name -> name.startsWith(fileNameStart));
+                    .anyMatch(name -> name.startsWith(fileNameStart) && name.endsWith(".jar"));
         } catch (IOException e) {
             LOGGER.error("e: ", e);
             return false;
