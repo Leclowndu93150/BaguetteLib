@@ -6,6 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.NeoForge;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -38,6 +39,7 @@ public class PlayerEquipmentMixin {
         NeoForge.EVENT_BUS.post(new InventoryUpdateEvent.All(self, slotIndex, oldStack, stack));
     }
 
+    @Unique
     private static int getSlotIndex(EquipmentSlot slot) {
         return switch (slot) {
             case MAINHAND -> 0;
