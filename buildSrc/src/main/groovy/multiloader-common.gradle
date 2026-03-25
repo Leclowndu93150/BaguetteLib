@@ -107,6 +107,12 @@ publishing {
             from components.java
         }
     }
+    publications.withType(MavenPublication) {
+        suppressAllPomMetadataWarnings()
+    }
+    tasks.withType(GenerateModuleMetadata) {
+        enabled = false
+    }
     repositories {
         maven {
             url System.getenv('local_maven_url') ?: new File(System.getProperty('user.home'), '.m2/repository').toURI()
