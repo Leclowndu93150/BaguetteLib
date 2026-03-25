@@ -54,7 +54,7 @@ publishMods {
     file = jar.archiveFile
     changelog = project.property('changelog')
     type = STABLE
-    displayName = "${mod_id}-${minecraft_version}-Neoforge-${version}"
+    displayName = "${mod_id}-${minecraft_version}-Neoforge-${project.version}"
     modLoaders.add("neoforge")
 
     curseforge {
