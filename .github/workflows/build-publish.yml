@@ -1,14 +1,10 @@
-name: Build & Publish
+name: Build
 
 on:
   push:
     branches: [ master, main, '**' ]
   pull_request:
     branches: [ master, main ]
-
-permissions:
-  contents: read
-  packages: write
 
 jobs:
   build:
@@ -30,13 +26,6 @@ jobs:
 
       - name: Build
         run: ./gradlew build
-
-      - name: Publish to GitHub Packages
-        if: github.event_name == 'push'
-        run: ./gradlew publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
