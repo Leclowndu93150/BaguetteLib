@@ -14,7 +14,10 @@
     "PlayerEquipmentMixin",
     "ServerPlayerDeathMixin"
   ],
-  "client": [],
+  "client": [
+    "AccessorSpriteContents",
+    "NativeImageAccessor"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

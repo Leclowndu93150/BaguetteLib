@@ -43,7 +43,7 @@ publishMods {
     file = jar.archiveFile
     changelog = "Release for Minecraft ${minecraft_version}"
     type = STABLE
-    displayName = "${mod_id}-${minecraft_version}-Fabric-${version}.jar"
+    displayName = "${mod_id}-${minecraft_version}-Fabric-${version}"
     modLoaders.add("fabric")
 
     curseforge {
