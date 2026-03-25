@@ -41,7 +41,7 @@ loom {
 
 publishMods {
     file = jar.archiveFile
-    changelog = "Release for Minecraft ${minecraft_version}"
+    changelog = project.property('changelog')
     type = STABLE
     displayName = "${mod_id}-${minecraft_version}-Fabric-${version}"
     modLoaders.add("fabric")
