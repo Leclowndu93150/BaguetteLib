@@ -2,33 +2,8 @@ plugins {
     id 'net.fabricmc.fabric-loom' version '1.15-SNAPSHOT' apply false
     id 'net.neoforged.moddev' version '2.0.141' apply false
     id 'me.modmuss50.mod-publish-plugin' version '1.1.0' apply false
-    id 'maven-publish' apply false
 }
 
-subprojects {
-    apply plugin: 'maven-publish'
-
-    publishing {
-        repositories {
-            maven {
-                name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/Leclowndu93150/BaguetteLib")
-                credentials {
-                    username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") ?: ""
-                    password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key") ?: ""
-                }
-            }
-        }
-        publications {
-            mavenJava(MavenPublication) {
-                from components.findByName("java") ?: components.first()
-                groupId = rootProject.group
-                artifactId = "${rootProject.mod_id}-${project.name}"
-                version = rootProject.version
-            }
-        }
-    }
-}
 
 def envFile = file('.env')
 def envProps = new Properties()

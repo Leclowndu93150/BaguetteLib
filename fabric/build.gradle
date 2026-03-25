@@ -40,10 +40,10 @@ loom {
 }
 
 publishMods {
-    file = remapJar.archiveFile
+    file = jar.archiveFile
     changelog = "Release for Minecraft ${minecraft_version}"
     type = STABLE
-    displayName = "${mod_id}-${minecraft_version}-Fabric"
+    displayName = "${mod_id}-${minecraft_version}-Fabric-${version}.jar"
     modLoaders.add("fabric")
 
     curseforge {

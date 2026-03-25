@@ -103,13 +103,21 @@ processResources {
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
-            artifactId base.archivesName.get()
+            artifactId "${mod_id}-${project.name}".toLowerCase()
             from components.java
         }
     }
     repositories {
         maven {
-            url System.getenv('local_maven_url')
+            url System.getenv('local_maven_url') ?: new File(System.getProperty('user.home'), '.m2/repository').toURI()
+        }
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Leclowndu93150/BaguetteLib")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR") ?: findProperty("gpr.user") ?: ""
+                password = System.getenv("GITHUB_TOKEN") ?: findProperty("gpr.key") ?: ""
+            }
         }
     }
 }
