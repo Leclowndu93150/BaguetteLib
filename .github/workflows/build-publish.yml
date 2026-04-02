@@ -1,4 +1,4 @@
-name: Build
+name: Build & Publish
 
 on:
   push:
@@ -18,17 +18,28 @@ jobs:
           distribution: 'temurin'
           java-version: '25'
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v4
 
-      - name: Grant execute permission
-        run: chmod +x gradlew
+      - run: chmod +x gradlew
 
       - name: Build
         run: ./gradlew build
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+      - name: Publish to Maven
+        if: github.ref == 'refs/heads/26.1' && github.event_name == 'push'
+        run: ./gradlew publish
+        env:
+          MAVEN_USER: ${{ secrets.MAVEN_USER }}
+          MAVEN_PASS: ${{ secrets.MAVEN_PASS }}
+
+      - name: Publish to CurseForge & Modrinth
+        if: github.ref == 'refs/heads/26.1' && github.event_name == 'push'
+        run: ./gradlew publishMods
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+
+      - uses: actions/upload-artifact@v4
         with:
           name: BaguetteLib
           path: |

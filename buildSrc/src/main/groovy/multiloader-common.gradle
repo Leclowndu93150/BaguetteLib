@@ -115,14 +115,11 @@ publishing {
     }
     repositories {
         maven {
-            url System.getenv('local_maven_url') ?: new File(System.getProperty('user.home'), '.m2/repository').toURI()
-        }
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/Leclowndu93150/BaguetteLib")
+            name = "Leclown"
+            url = uri("https://maven.leclowndu93150.dev/releases")
             credentials {
-                username = System.getenv("GITHUB_ACTOR") ?: findProperty("gpr.user") ?: ""
-                password = System.getenv("GITHUB_TOKEN") ?: findProperty("gpr.key") ?: ""
+                username = System.getenv("MAVEN_USER") ?: ""
+                password = System.getenv("MAVEN_PASS") ?: ""
             }
         }
     }
