@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.leclowndu93150.baguettelib.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "InventoryMixin",
+    "ItemEntityPickupMixin",
+    "LivingEntityDeathMixin",
+    "PacketHandlerMixin",
+    "PlayerAbilitiesPacketMixin",
+    "PlayerDeathMixin",
+    "PlayerEquipmentMixin",
+    "ServerPlayerDeathMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -16,6 +16,15 @@ prism {
 
     curseMaven()
 
+    version("1.21.1") {
+        parchmentMinecraftVersion = "1.21.1"
+        parchmentMappingsVersion = "2024.11.17"
+        neoforge {
+            loaderVersion = "21.1.171"
+            loaderVersionRange = "[4,)"
+        }
+    }
+
     version("26.1") {
         fabric {
             loaderVersion = "0.18.4"

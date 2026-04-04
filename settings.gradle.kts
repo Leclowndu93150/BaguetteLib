@@ -17,6 +17,10 @@ plugins {
 rootProject.name = "BaguetteLib"
 
 prism {
+    version("1.21.1") {
+        neoforge()
+    }
+
     version("26.1") {
         common()
         fabric()
