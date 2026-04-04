@@ -27,14 +27,14 @@ jobs:
 
       - name: Publish to Maven
         if: github.ref == 'refs/heads/26.1' && github.event_name == 'push'
-        run: ./gradlew publish
+        run: ./gradlew publishAllMaven
         env:
           MAVEN_USER: ${{ secrets.MAVEN_USER }}
           MAVEN_PASS: ${{ secrets.MAVEN_PASS }}
 
       - name: Publish to CurseForge & Modrinth
         if: github.ref == 'refs/heads/26.1' && github.event_name == 'push'
-        run: ./gradlew publishMods
+        run: ./gradlew publishAllMods
         env:
           CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
@@ -43,7 +43,5 @@ jobs:
         with:
           name: BaguetteLib
           path: |
-            fabric/build/libs/*.jar
-            neoforge/build/libs/*.jar
-            common/build/libs/*.jar
+            versions/26.1/*/build/libs/*.jar
           if-no-files-found: ignore
