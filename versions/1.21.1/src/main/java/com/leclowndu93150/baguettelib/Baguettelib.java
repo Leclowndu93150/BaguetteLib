@@ -1,9 +1,13 @@
 package com.leclowndu93150.baguettelib;
 
+import com.leclowndu93150.baguettelib.curios.BaguetteCuriosData;
+import com.leclowndu93150.baguettelib.curios.CurioSlotData;
 import com.leclowndu93150.baguettelib.event.entity.CreativeFlightEvent;
 import com.leclowndu93150.baguettelib.example.ExamplePacket;
 import com.leclowndu93150.baguettelib.network.NetworkManager;
 import com.mojang.logging.LogUtils;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -13,6 +17,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -26,12 +32,25 @@ public class Baguettelib {
     public static final String MODID = "baguettelib";
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENTS =
+            DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, MODID);
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<CurioSlotData>> CURIO_SLOT_DATA =
+            DATA_COMPONENTS.register("curio_slot_data", () ->
+                    DataComponentType.<CurioSlotData>builder()
+                            .persistent(CurioSlotData.CODEC)
+                            .networkSynchronized(CurioSlotData.STREAM_CODEC)
+                            .build());
+
     public static NetworkManager NETWORK;
     public Baguettelib(IEventBus modEventBus, ModContainer modContainer){
 
         // Before anyone asks bla bla bla why do you need a library now ?
         // it's because my mod's entry point doesn't even load when reborn is installed
         // I tried multiple ways and none of them worked. deal with it.
+        DATA_COMPONENTS.register(modEventBus);
+        BaguetteCuriosData.registerSupplier(CURIO_SLOT_DATA);
+
         if(isModInFolder("chisel-neoforge") && isModInFolder("chisel-1.21.1")){
             throw new ModLoadingException(ModLoadingIssue.error("Chisel Modern is not compatible with Chisel Reborn. People will not loose their builds if they used the latter mod, as there is auto migration."));
         }

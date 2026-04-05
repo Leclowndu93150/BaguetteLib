@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.leclowndu93150.baguettelib"
-version = "2.0.2"
+version = "2.0.3"
 
 prism {
     metadata {
@@ -22,6 +22,10 @@ prism {
         neoforge {
             loaderVersion = "21.1.171"
             loaderVersionRange = "[4,)"
+            dependencies {
+                runtimeOnly("curse.maven:modmenu-308702:7808230")
+                implementation("curse.maven:curios-309927:6529130")
+            }
         }
     }
 
@@ -36,11 +40,14 @@ prism {
         neoforge {
             loaderVersion = "26.1.0.1-beta"
             loaderVersionRange = "[4,)"
+            dependencies {
+                implementation("curse.maven:curios-309927:7810501")
+            }
         }
     }
 
     publishing {
-        changelog = "Added particle and color utilities"
+        changelog = "Added Curios Utilities"
         type = STABLE
 
         curseforge {
