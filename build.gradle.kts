@@ -29,16 +29,17 @@ prism {
         }
     }
 
-    version("26.1") {
+    version("26.1.2") {
+        common {}
         fabric {
-            loaderVersion = "0.18.4"
-            fabricApi("0.144.0+26.1")
+            loaderVersion = "0.18.6"
+            fabricApi("0.145.4+26.1.2")
             dependencies {
                 runtimeOnly("curse.maven:modmenu-308702:7808230")
             }
         }
         neoforge {
-            loaderVersion = "26.1.0.1-beta"
+            loaderVersion = "26.1.2.10-beta"
             loaderVersionRange = "[4,)"
             dependencies {
                 implementation("curse.maven:curios-309927:7810501")
@@ -47,7 +48,7 @@ prism {
     }
 
     publishing {
-        changelog = "Added Curios Utilities"
+        changelog = "Add statistic tracking utilities"
         type = STABLE
 
         curseforge {
