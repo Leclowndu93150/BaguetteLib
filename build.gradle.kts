@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.leclowndu93150.baguettelib"
-version = "2.0.3"
+version = "2.0.4"
 
 prism {
     metadata {
@@ -48,7 +48,7 @@ prism {
     }
 
     publishing {
-        changelog = "Add statistic tracking utilities"
+        changelog = "improve particle registry"
         type = STABLE
 
         curseforge {
