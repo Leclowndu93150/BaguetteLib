@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.leclowndu93150.baguettelib.mixin",
+  "refmap": "${mod_id}.refmap.json",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "InventoryMixin",
+    "ItemEntityPickupMixin",
+    "LivingEntityDeathMixin",
+    "PacketHandlerMixin",
+    "PlayerAbilitiesPacketMixin",
+    "PlayerDeathMixin",
+    "PlayerEquipmentMixin",
+    "ServerPlayerDeathMixin"
+  ],
+  "client": [
+    "AccessorSpriteContents",
+    "NativeImageAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

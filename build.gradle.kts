@@ -47,8 +47,27 @@ prism {
         }
     }
 
+    version("26.2") {
+        minecraftVersions("26.2", "26.2.1", "26.2.2")
+        common {}
+        fabric {
+            loaderVersion = "0.18.6"
+            fabricApi("0.152.1+26.2")
+            dependencies {
+                runtimeOnly("curse.maven:modmenu-308702:7808230")
+            }
+        }
+        neoforge {
+            loaderVersion = "26.2.0.1-beta"
+            loaderVersionRange = "[4,)"
+            dependencies {
+                implementation("curse.maven:curios-309927:7810501")
+            }
+        }
+    }
+
     publishing {
-        changelog = "improve particle registry"
+        changelog = "26.2"
         type = STABLE
 
         curseforge {
