@@ -1,0 +1,27 @@
+{
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "contact": {},
+    "license": "${license}",
+    "icon": "${mod_id}.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "com.leclowndu93150.baguettelib.BaguettelibFabric"
+        ],
+        "modmenu": [
+            "com.leclowndu93150.baguettelib.config.modmenu.BaguetteModMenuIntegration"
+        ]
+    },
+    "depends": {
+        "fabricloader": ">=${fabric_loader_version}",
+        "minecraft": "~${minecraft_version}",
+        "java": ">=${java_version}"
+    }
+}

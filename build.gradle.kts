@@ -47,14 +47,59 @@ prism {
     version("1.21.1") {
         parchmentMinecraftVersion = "1.21.1"
         parchmentMappingsVersion = "2024.11.17"
+        common {}
+        fabric {
+            loaderVersion = "0.19.2"
+            fabricApi("0.116.12+1.21.1")
+            dependencies {
+                modCompileOnly("curse.maven:modmenu-308702:7808443")
+                modRuntimeOnly("curse.maven:modmenu-308702:7808443")
+                modCompileOnlyApi("dev.isxander:yet-another-config-lib:3.8.1+1.21.1-fabric")
+                modRuntimeOnly("dev.isxander:yet-another-config-lib:3.8.1+1.21.1-fabric")
+            }
+
+            publishingDependencies {
+                optional("yacl")
+                optional("modmenu")
+            }
+        }
         neoforge {
             loaderVersion = "21.1.171"
             loaderVersionRange = "[4,)"
             dependencies {
-                runtimeOnly("curse.maven:modmenu-308702:7808230")
                 implementation("curse.maven:curios-309927:6529130")
                 modCompileOnlyApi("dev.isxander:yet-another-config-lib:3.8.1+1.21.1-neoforge")
                 modRuntimeOnly("dev.isxander:yet-another-config-lib:3.8.1+1.21.1-neoforge")
+            }
+
+            publishingDependencies {
+                optional("yacl")
+            }
+        }
+    }
+
+    version("1.21.11") {
+        common {}
+        fabric {
+            loaderVersion = "0.19.2"
+            fabricApi("0.141.4+1.21.11")
+            dependencies {
+                modCompileOnly("curse.maven:modmenu-308702:7808841")
+                modRuntimeOnly("curse.maven:modmenu-308702:7808841")
+                modCompileOnlyApi("dev.isxander:yet-another-config-lib:3.8.1+1.21.11-fabric")
+                modRuntimeOnly("dev.isxander:yet-another-config-lib:3.8.1+1.21.11-fabric")
+            }
+
+            publishingDependencies {
+                optional("yacl")
+                optional("modmenu")
+            }
+        }
+        neoforge {
+            loaderVersion = "21.11.42"
+            dependencies {
+                modCompileOnlyApi("dev.isxander:yet-another-config-lib:3.8.1+1.21.11-neoforge")
+                modRuntimeOnly("dev.isxander:yet-another-config-lib:3.8.1+1.21.11-neoforge")
             }
 
             publishingDependencies {
