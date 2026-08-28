@@ -1,29 +1,31 @@
 package com.leclowndu93150.baguettelib.platform;
 
 import com.leclowndu93150.baguettelib.platform.services.IPlatformHelper;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.nio.file.Path;
 
-public class FabricPlatformHelper implements IPlatformHelper {
+public class ForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public String getPlatformName() {
-        return "Fabric";
+        return "Forge";
     }
 
     @Override
     public boolean isModLoaded(String modId) {
-        return FabricLoader.getInstance().isModLoaded(modId);
+        return ModList.get().isLoaded(modId);
     }
 
     @Override
     public boolean isDevelopmentEnvironment() {
-        return FabricLoader.getInstance().isDevelopmentEnvironment();
+        return !FMLLoader.isProduction();
     }
 
     @Override
     public Path getConfigDir() {
-        return FabricLoader.getInstance().getConfigDir();
+        return FMLPaths.CONFIGDIR.get();
     }
 }

@@ -3,6 +3,9 @@ package com.leclowndu93150.baguettelib.platform;
 import com.leclowndu93150.baguettelib.platform.services.IPlatformHelper;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.fml.loading.FMLPaths;
+
+import java.nio.file.Path;
 
 public class NeoForgePlatformHelper implements IPlatformHelper {
 
@@ -19,5 +22,10 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
     @Override
     public boolean isDevelopmentEnvironment() {
         return !FMLLoader.getCurrent().isProduction();
+    }
+
+    @Override
+    public Path getConfigDir() {
+        return FMLPaths.CONFIGDIR.get();
     }
 }
