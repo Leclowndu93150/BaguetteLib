@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.leclowndu93150.baguettelib"
-version = "2.0.5"
+version = "2.0.6"
 
 prism {
     metadata {

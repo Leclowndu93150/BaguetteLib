@@ -3,7 +3,6 @@ package com.leclowndu93150.baguettelib;
 import com.leclowndu93150.baguettelib.curios.BaguetteCuriosData;
 import com.leclowndu93150.baguettelib.curios.CurioSlotData;
 import com.leclowndu93150.baguettelib.event.entity.CreativeFlightEvent;
-import com.leclowndu93150.baguettelib.example.ExamplePacket;
 import com.leclowndu93150.baguettelib.network.NetworkManager;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.component.DataComponentType;
@@ -57,16 +56,6 @@ public class Baguettelib {
 
         NETWORK = NetworkManager.create(MODID, modEventBus);
 
-        NETWORK.registerPacket(ExamplePacket.class, "example")
-                .codec(ExamplePacket.STREAM_CODEC)
-                .serverToClient()
-                .handler((packet, context) -> {
-                    context.enqueueWork(() -> {
-                        LOGGER.info("Received packet: {} - {}", packet.value(), packet.message());
-                    });
-                })
-                .build();
-
         NeoForge.EVENT_BUS.addListener(this::onPlayerJoin);
         NeoForge.EVENT_BUS.addListener(this::onCreativeFlight);
     }
@@ -95,7 +84,6 @@ public class Baguettelib {
 
     @SubscribeEvent
     public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event){
-        // if(event.getEntity() instanceof ServerPlayer player) Baguettelib.NETWORK.sendToPlayer(player, new ExamplePacket(69,"Hello World"));
     }
 
     @SubscribeEvent
