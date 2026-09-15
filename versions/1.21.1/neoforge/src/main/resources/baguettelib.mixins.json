@@ -4,6 +4,7 @@
   "package": "com.leclowndu93150.baguettelib.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "DataComponentPatchMixin",
     "InventoryMixin",
     "ItemEntityPickupMixin",
     "LivingEntityDeathMixin",

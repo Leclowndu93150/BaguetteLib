@@ -9,11 +9,12 @@ displayName = "${mod_name}"
 description = "${description}"
 authors = "${mod_author}"
 logoFile = "${mod_id}.png"
+displayTest = "IGNORE_ALL_VERSION"
 
 [[dependencies.${mod_id}]]
 modId = "forge"
 mandatory = true
-versionRange = "[${forge_version},)"
+versionRange = "[47,)"
 ordering = "NONE"
 side = "BOTH"
 

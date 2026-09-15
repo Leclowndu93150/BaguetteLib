@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.leclowndu93150.baguettelib"
-version = "2.0.6"
+version = "2.0.7"
 
 prism {
     metadata {
@@ -174,7 +174,7 @@ prism {
     }
 
     publishing {
-        changelog = "Added 1.20.1 (Fabric + Forge) and YACL config screen plumbing: register a screen in common and it shows up in Mod Menu and the NeoForge/Forge mod list automatically."
+        changelog = "Fixed clients without BaguetteLib being kicked from NeoForge/Fabric servers (unknown registry key baguettelib:curio_slot_data). Curio slot data is now stored in minecraft:custom_data and old items are migrated automatically on load. Lowered the required Forge version on 1.20.1 to 47 and marked the mod as optional on the client. API: BaguetteCuriosData.getCurioSlotDataType() and registerSupplier() were removed, use setSlotData/getSlotData/hasSlotData/removeSlotData."
         type = STABLE
 
         curseforge {
