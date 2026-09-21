@@ -194,7 +194,7 @@ prism {
             loaderVersion = "26.3.0.8-beta"
             loaderVersionRange = "[4,)"
             dependencies {
-                implementation("curse.maven:curios-309927:8478313")
+                //implementation("curse.maven:curios-309927:8478313")
                 modCompileOnlyApi("dev.isxander:yet-another-config-lib:3.9.7+26.3-neoforge")
                 modRuntimeOnly("dev.isxander:yet-another-config-lib:3.9.7+26.3-neoforge")
             }
