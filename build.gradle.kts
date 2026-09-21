@@ -173,8 +173,40 @@ prism {
         }
     }
 
+    version("26.3") {
+        common {}
+        fabric {
+            loaderVersion = "0.19.5"
+            fabricApi("0.161.0+26.3")
+            dependencies {
+                modCompileOnly("curse.maven:modmenu-308702:8854511")
+                modRuntimeOnly("curse.maven:modmenu-308702:8854511")
+                modCompileOnlyApi("dev.isxander:yet-another-config-lib:3.9.7+26.3-fabric")
+                modRuntimeOnly("dev.isxander:yet-another-config-lib:3.9.7+26.3-fabric")
+            }
+
+            publishingDependencies {
+                optional("yacl")
+                optional("modmenu")
+            }
+        }
+        neoforge {
+            loaderVersion = "26.3.0.8-beta"
+            loaderVersionRange = "[4,)"
+            dependencies {
+                implementation("curse.maven:curios-309927:8478313")
+                modCompileOnlyApi("dev.isxander:yet-another-config-lib:3.9.7+26.3-neoforge")
+                modRuntimeOnly("dev.isxander:yet-another-config-lib:3.9.7+26.3-neoforge")
+            }
+
+            publishingDependencies {
+                optional("yacl")
+            }
+        }
+    }
+
     publishing {
-        changelog = "Fixed clients without BaguetteLib being kicked from NeoForge/Fabric servers (unknown registry key baguettelib:curio_slot_data). Curio slot data is now stored in minecraft:custom_data and old items are migrated automatically on load. Lowered the required Forge version on 1.20.1 to 47 and marked the mod as optional on the client. API: BaguetteCuriosData.getCurioSlotDataType() and registerSupplier() were removed, use setSlotData/getSlotData/hasSlotData/removeSlotData."
+        changelog = "port to 26.3"
         type = STABLE
 
         curseforge {
